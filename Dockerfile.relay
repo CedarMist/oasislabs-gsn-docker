@@ -1,0 +1,14 @@
+FROM oasislabs/gsn:latest
+
+ENV RELAY_HUB_ADDRESS=0xc4423AB6133B06e4e60D594Ac49abE53374124b3
+ENV STAKE_TOKEN_ADDRESS=0x6Ed21672c0c26Daa32943F7b1cA1f1d0ABdbac66
+ENV OWNER_ADDRESS=0xfA3AC9f65C9D75EE3978ab76c6a1105f03156204
+ENV SAPPHIRE_NODE_URL=https://testnet.sapphire.oasis.dev
+
+#VOLUME /work
+RUN mkdir -p /work && chown 1000:1000 /work
+
+USER 1000:1000
+
+CMD npx gsn relayer-run --relayHubAddress "${RELAY_HUB_ADDRESS}" --managerStakeTokenAddress  "${STAKE_TOKEN_ADDRESS}" --ownerAddress "${OWNER_ADDRESS}" --ethereumNodeUrl "${SAPPHIRE_NODE_URL}" --workdir /work
+
